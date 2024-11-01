@@ -19,16 +19,16 @@ let divide = function(a, b) {
 function operate(a, b, operator) {
     switch(operator) {
         case '+':
-            return a + b;
+           return add(a, b);
     
         case '-':
-           return a - b;
+          return subtract(a, b);
            
         case '*':
-           return a * b
+           return multiply(a, b);
             
         case '/':
-           return a / b;        
+          return divide(a, b);       
 
     }
 
