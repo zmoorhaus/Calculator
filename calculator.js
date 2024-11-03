@@ -30,6 +30,25 @@ function operate(a, b, operator) {
         case '/':
           return divide(a, b);       
 
-    }
+    };
 
 };
+
+
+
+const numberButton = document.querySelectorAll('.number-button')
+numberButton.forEach((button, index) => button.textContent = index + 1);
+
+
+operatorSymbols = ['+', "-", "*", "/"]
+const operatorButtons = document.querySelectorAll('.operator-button')
+operatorButtons.forEach((button, index) => button.textContent = operatorSymbols[index]);
+
+equalButton = document.querySelector('#equal-button');
+equalButton.textContent = '=';
+
+clearButton = document.querySelector('#clear-button');
+clearButton.textContent = "clear";
+    
+   
+  
