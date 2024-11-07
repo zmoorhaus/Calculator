@@ -34,6 +34,8 @@ function operate(a, b, operator) {
 
 };
 
+displayText = document.querySelector('#display-text')
+displayText.textContent = "";
 
 
 const numberButton = document.querySelectorAll('.number-button')
@@ -49,6 +51,14 @@ equalButton.textContent = '=';
 
 clearButton = document.querySelector('#clear-button');
 clearButton.textContent = "clear";
-    
-   
-  
+
+
+function numbersOnDisplay(event) {
+   displayText.textContent = event.target.id
+}
+
+numberButton.forEach((button) => button.addEventListener("click", numbersOnDisplay));
+
+
+
+ 
