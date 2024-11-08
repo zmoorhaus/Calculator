@@ -53,9 +53,13 @@ equalButton.textContent = '=';
 clearButton = document.querySelector('#clear-button');
 clearButton.textContent = "clear";
 
+let operationDone = false;
 
 function numDisplay(event) {
-    
+        if (operationDone === true) {
+            displayText.textContent = "";
+            operationDone = false;
+        };
         displayText.textContent += event.target.id;
         firstNumber = displayText.textContent;
 };
@@ -82,8 +86,10 @@ clearButton.addEventListener("click", function() {
 
 equalButton.addEventListener("click", function() {
     array = displayText.textContent.split(" ");
-    console.log(array);
     operate(+array[0], +array[2], array[1]);
+    operationDone = true;
+    
+    
     
 
 });
