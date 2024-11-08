@@ -1,19 +1,19 @@
 console.log("its time to calculate!!!")
 
 let add = function(a, b) {
-    return (a + b);
+    displayText.textContent = (a + b);
 };
 
 let subtract = function(a, b) {
-    return (a - b);
+    displayText.textContent = (a - b);
 };
 
 let multiply = function(a, b) {
-    return (a * b)
+    displayText.textContent = (a * b)
 };
 
 let divide = function(a, b) {
-    return (a / b)
+    displayText.textContent = (a / b)
 };
 
 function operate(a, b, operator) {
@@ -35,7 +35,8 @@ function operate(a, b, operator) {
 };
 
 displayText = document.querySelector('#display-text')
-displayText.textContent = "";
+
+
 
 
 const numberButton = document.querySelectorAll('.number-button')
@@ -53,12 +54,37 @@ clearButton = document.querySelector('#clear-button');
 clearButton.textContent = "clear";
 
 
-function numbersOnDisplay(event) {
-   displayText.textContent = event.target.id
-}
+function numDisplay(event) {
+    
+        displayText.textContent += event.target.id;
+        firstNumber = displayText.textContent;
+};
 
-numberButton.forEach((button) => button.addEventListener("click", numbersOnDisplay));
+numberButton.forEach((button) => button.addEventListener("click", numDisplay));
 
 
 
- 
+function operatorDisplay(event) {
+    if (displayText.textContent === "") {
+        alert("choose a number") 
+    } else {
+        displayText.textContent += ` ${event.target.textContent} `;
+    }
+};
+
+operatorButtons.forEach((button) => button.addEventListener("click", operatorDisplay)); 
+
+
+
+clearButton.addEventListener("click", function() { 
+    displayText.textContent = "";
+});
+
+equalButton.addEventListener("click", function() {
+    array = displayText.textContent.split(" ");
+    console.log(array);
+    operate(+array[0], +array[2], array[1]);
+    
+
+});
+
