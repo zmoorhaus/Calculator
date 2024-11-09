@@ -1,4 +1,14 @@
+body {
+    background-color: azure;
+}
+
+h1 {
+
+}
+
 #calculator {
+   align-items: center;
+    flex-direction: column;
     display: flex;
     justify-content: center;
 }
@@ -7,62 +17,88 @@
     display: flex;
     flex-wrap: wrap;
     border: 5px solid black;
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
     padding: 20px;
     margin-top: 100px;
     border-radius: 20px;
+    background-color: cornflowerblue;
 }
 
 #display {
+    border-radius: 15px;
     display: flex;
     border: 5px solid black;
-    width: 500px;
+    width: 350px;
     display: flex;
-    height: 50px;
-    margin-bottom: 50px;
+    height: 60px;
     justify-content: flex-end;
     align-items: center;
     padding-right: 10px;
+    background-color: white;
 }
 
-#all-buttons {
+#first-buttons {
+    margin-top: 20px;
     display: flex;
-    width: 400px;
+    flex-direction: column;
 }
 
 #number-buttons-box {
-    height: 250px;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-top: 5px;
+    height: 150px;
     display: flex;
-    border: 5px solid black;
+    border: 2px solid black;
     width: 275px;
     justify-content: space-around;
     flex-wrap: wrap;
+    border-bottom: 0px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: lightslategray;
 }
 
 #operator-buttons-box {
+    margin-top: 24px;
+    justify-content: space-between;
+    height: 200px;
+    width: 55px;
     display: flex;
-    border: 5px solid black;
     flex-direction: column;
-    height: 250px;
     margin-left: auto;
+
 }
 
-.number-button {
-    width: 75px;
-    height: 70px;
+#zeroAndDecimal {
+   
+    border-right: 2px solid;
+    border-bottom: 2px solid;
     display: flex;
-    margin: 6px;
-    align-items: center;
     justify-content: center;
+    border-left: 2px solid;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: lightslategray;
+}
+
+
+
+.number-button {
+    margin: 5px;
+    height: 40px;
+    width: 50p;
+    width: 80px;
+    border-radius: 15px;
+}
+
+.otherButtons {
+   
 }
 
 .operator-button {
-    width: 75px;
-    height: 60px;
-    display: flex;
-    margin: 5px;
-    justify-content: center;
-    align-items: center;
+    border-radius: 10px;
+    height: 28px;
 }
 

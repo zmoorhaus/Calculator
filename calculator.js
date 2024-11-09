@@ -40,7 +40,11 @@ displayText = document.querySelector('#display-text')
 
 
 const numberButton = document.querySelectorAll('.number-button')
-numberButton.forEach((button, index) => button.textContent = index + 1);
+numberButton.forEach((button, index) => {
+    if (index <= 8) { 
+        button.textContent = index + 1
+    }
+});
 
 
 operatorSymbols = ['+', "-", "*", "/"]
@@ -59,7 +63,7 @@ function numDisplay(event) {
         if (operationDone === true) {
             displayText.textContent = "";
             operationDone = false;
-        };
+        }; 
         displayText.textContent += event.target.id;
         firstNumber = displayText.textContent;
 };
@@ -71,6 +75,8 @@ numberButton.forEach((button) => button.addEventListener("click", numDisplay));
 function operatorDisplay(event) {
     if (displayText.textContent === "") {
         alert("choose a number") 
+    } else if (event.target.textContent === "=") {   
+        return;  
     } else {
         displayText.textContent += ` ${event.target.textContent} `;
     }
@@ -88,6 +94,7 @@ equalButton.addEventListener("click", function() {
     array = displayText.textContent.split(" ");
     operate(+array[0], +array[2], array[1]);
     operationDone = true;
+
     
     
     
