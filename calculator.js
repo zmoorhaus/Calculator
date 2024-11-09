@@ -59,18 +59,27 @@ clearButton.textContent = "clear";
 
 let operationDone = false;
 
+
+
 function numDisplay(event) {
+  
         if (operationDone === true) {
+                if (extraOperator === true) {
+                    operationDone = false;
+                } else {
             displayText.textContent = "";
             operationDone = false;
+            }
         }; 
         displayText.textContent += event.target.id;
+        array = displayText.textContent.split(" ");
         firstNumber = displayText.textContent;
+      
 };
 
 numberButton.forEach((button) => button.addEventListener("click", numDisplay));
 
-
+let extraOperator = false;
 
 function operatorDisplay(event) {
     if (displayText.textContent === "") {
@@ -79,10 +88,26 @@ function operatorDisplay(event) {
         return;  
     } else {
         displayText.textContent += ` ${event.target.textContent} `;
-    }
+        array = displayText.textContent.split(" ");
+        extraOperator = true;
+    } 
+    
+
+    
+
 };
 
 operatorButtons.forEach((button) => button.addEventListener("click", operatorDisplay)); 
+ 
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        if (array.length > 3) {
+            calculate();
+            displayText.textContent += ` ${event.target.textContent} `;
+        } 
+    });
+});
+
 
 
 
@@ -90,14 +115,18 @@ clearButton.addEventListener("click", function() {
     displayText.textContent = "";
 });
 
-equalButton.addEventListener("click", function() {
+
+
+function calculate() {
     array = displayText.textContent.split(" ");
     operate(+array[0], +array[2], array[1]);
     operationDone = true;
-
-    
-    
     
 
-});
+}
+
+equalButton.addEventListener("click", calculate);
+    
+
+
 
