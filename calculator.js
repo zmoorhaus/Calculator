@@ -57,6 +57,10 @@ equalButton.textContent = '=';
 clearButton = document.querySelector('#clear-button');
 clearButton.textContent = "clear";
 
+const decimalButton = document.querySelector('#decimal');
+
+
+
 let operationDone = false;
 
 
@@ -77,6 +81,16 @@ function numDisplay(event) {
       
 };
 
+document.addEventListener("keydown", function(event) {
+    if (event.key >= '0' && event.key <= '9') {
+        displayText.textContent += event.key;
+     } else if (['+', '-', '*', '/'].includes(event.key)) {
+        displayText.textContent += ` ${event.key} `;
+    } else {
+        event.preventDefault();
+    }
+});
+
 numberButton.forEach((button) => button.addEventListener("click", numDisplay));
 
 let extraOperator = false;
@@ -84,6 +98,7 @@ let extraOperator = false;
 function operatorDisplay(event) {
     if (displayText.textContent === "") {
         alert("choose a number") 
+        displayText.textContent = "";
     } else if (event.target.textContent === "=") {   
         return;  
     } else {
@@ -109,11 +124,31 @@ operatorButtons.forEach((button) => {
 });
 
 
-
+decimalButton.addEventListener("click", function() {
+    if (displayText.textContent.endsWith(".")) {
+        return;
+    } else {
+    displayText.textContent += ".";
+    }
+});
 
 clearButton.addEventListener("click", function() { 
     displayText.textContent = "";
 });
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        calculate();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+        if (event.key === "Backspace" && operationDone === false) {
+                displayText.textContent = displayText.textContent.slice(0, -1)
+        } else if (event.key === "Backspace" && operationDone === true) {
+                displayText.textContent = "";     
+        }
+    });
 
 
 
@@ -121,8 +156,15 @@ function calculate() {
     array = displayText.textContent.split(" ");
     operate(+array[0], +array[2], array[1]);
     operationDone = true;
+    let result = round(displayText.textContent, 5)
+    displayText.textContent = result;
+ 
     
+};
 
+function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
 }
 
 equalButton.addEventListener("click", calculate);
