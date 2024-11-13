@@ -63,25 +63,24 @@ const decimalButton = document.querySelector('#decimal');
 
 
 
-let operationDone = false;
+operationDone = false;
 
 
 
 function numDisplay(event) {
-  
-        if (operationDone === true) {
-                if (extraOperator === true) {
-                    operationDone = false;
-                } else {
-            displayText.textContent = "";
-            operationDone = false;
-            }
-        }; 
+
+    if (operationDone === true) {
+        displayText.textContent = "";
+        operationDone = false;
+    }
+   
+        
         displayText.textContent += event.target.id;
         array = displayText.textContent.split(" ");
         firstNumber = displayText.textContent;
+        }
       
-};
+
 
 document.addEventListener("keydown", function(event) {
     if (event.ctrlKey || event.metaKey || event.altKey) {
@@ -98,9 +97,16 @@ document.addEventListener("keydown", function(event) {
 
 numberButton.forEach((button) => button.addEventListener("click", numDisplay));
 
-let extraOperator = false;
+///let extraOperator = false;
 
 function operatorDisplay(event) {
+
+    operationDone = false;
+    if (operationDone === true) {
+        displayText.textContent += ` ${event.target.textContent} `;
+        operationDone = false;
+    };
+
     if (displayText.textContent === "") {
         alert("choose a number") 
         displayText.textContent = "";
@@ -109,7 +115,7 @@ function operatorDisplay(event) {
     } else {
         displayText.textContent += ` ${event.target.textContent} `;
         array = displayText.textContent.split(" ");
-        extraOperator = true;
+       // extraOperator = true;
     } 
     
 
@@ -124,9 +130,14 @@ operatorButtons.forEach((button) => {
         if (array.length > 3) {
             calculate();
             displayText.textContent += ` ${event.target.textContent} `;
+            operationDone = false;
         } 
     });
 });
+
+
+let zero = document.querySelector(".zeroButton");
+zero.addEventListener("click", numDisplay);
 
 
 decimalButton.addEventListener("click", function() {
@@ -158,11 +169,12 @@ document.addEventListener("keydown", function(event) {
 
 
 function calculate() {
+    operationDone = true;
     array = displayText.textContent.split(" ");
     operate(+array[0], +array[2], array[1]);
-    operationDone = true;
     let result = round(displayText.textContent, 5)
     displayText.textContent = result;
+    
  
     
 };
