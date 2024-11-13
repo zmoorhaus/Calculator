@@ -1,5 +1,7 @@
 console.log("its time to calculate!!!")
 
+
+
 let add = function(a, b) {
     displayText.textContent = (a + b);
 };
@@ -82,6 +84,9 @@ function numDisplay(event) {
 };
 
 document.addEventListener("keydown", function(event) {
+    if (event.ctrlKey || event.metaKey || event.altKey) {
+        return; // Exit the function and let the browser handle it
+    }
     if (event.key >= '0' && event.key <= '9') {
         displayText.textContent += event.key;
      } else if (['+', '-', '*', '/'].includes(event.key)) {
