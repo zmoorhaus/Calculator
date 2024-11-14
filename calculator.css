@@ -53,7 +53,7 @@ h1 {
     padding-top: 5px;
     height: 150px;
     display: flex;
-    border: 2px solid black;
+    border: 5px solid black;
     width: 275px;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -75,16 +75,14 @@ h1 {
 }
 
 #zeroAndDecimal {
-   
-    border-right: 2px solid;
-    border-bottom: 2px solid;
+    border-right: 5px solid;
+    border-bottom: 5px solid;
     display: flex;
     justify-content: center;
-    border-left: 2px solid;
+    border-left: 5px solid;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: lightslategray;
-    
 }
 
 
@@ -110,14 +108,4 @@ h1 {
     height: 28px;
 }
 
-#zeroAndDecimal {
-   
-    border-right: 2px solid;
-    border-bottom: 2px solid;
-    display: flex;
-    justify-content: center;
-    border-left: 2px solid;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color: lightslategray;
-}
+

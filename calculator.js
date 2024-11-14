@@ -78,26 +78,86 @@ function numDisplay(event) {
         displayText.textContent += event.target.id;
         array = displayText.textContent.split(" ");
         firstNumber = displayText.textContent;
-        }
+}
       
 
 
+
 document.addEventListener("keydown", function(event) {
+
+    array = displayText.textContent.split(" ");
+    
+    
+    
+    
     if (event.ctrlKey || event.metaKey || event.altKey) {
-        return; // Exit the function and let the browser handle it
+        return; 
     }
+
     if (event.key >= '0' && event.key <= '9') {
+        if (operationDone === true) {
+            displayText.textContent = "";
+            operationDone = false;
+        }
         displayText.textContent += event.key;
-     } else if (['+', '-', '*', '/'].includes(event.key)) {
-        displayText.textContent += ` ${event.key} `;
+
+    } else if (event.key === '.') {
+        
+        
+        if (operationDone === true) {
+            displayText.textContent = "";
+            operationDone = false;
+
+        } 
+        if (array.length === 1 && array[0].includes('.')) {
+            event.preventDefault(); 
+            return;
+        }
+
+        if (array.length === 3 && array[2].includes('.')) {
+            event.preventDefault(); 
+            return;
+        }
+
+       
+        displayText.textContent += event.key;
+
+        
+        
+    } else if (['+', '-', '*', '/'].includes(event.key)) {
+        operationDone = false;
+        if (displayText.textContent === " ") {
+            return;
+        } else if (!displayText.textContent.endsWith(' ')) {
+            displayText.textContent += ` ${event.key} `;   
+        } 
+
     } else {
         event.preventDefault();
     }
+
+    array = displayText.textContent.split(" ");
+  
+
+    if (array.length > 3) {
+        displayText.textContent += ` ${event.target.textContent} `;
+        array = displayText.textContent.split(" ");
+        operate(+array[0], +array[2], array[1]);
+        let result = round(displayText.textContent, 5)
+        displayText.textContent = result;
+        
+        
+        if (['+', '-', '*', '/'].includes(event.key))
+           
+        displayText.textContent += ` ${event.key} `;
+        
+    } 
+
 });
 
 numberButton.forEach((button) => button.addEventListener("click", numDisplay));
 
-///let extraOperator = false;
+
 
 function operatorDisplay(event) {
 
@@ -115,7 +175,7 @@ function operatorDisplay(event) {
     } else {
         displayText.textContent += ` ${event.target.textContent} `;
         array = displayText.textContent.split(" ");
-       // extraOperator = true;
+       
     } 
     
 
@@ -127,11 +187,13 @@ operatorButtons.forEach((button) => button.addEventListener("click", operatorDis
  
 operatorButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
+       
         if (array.length > 3) {
             calculate();
             displayText.textContent += ` ${event.target.textContent} `;
             operationDone = false;
         } 
+    
     });
 });
 
@@ -141,12 +203,16 @@ zero.addEventListener("click", numDisplay);
 
 
 decimalButton.addEventListener("click", function() {
-    if (displayText.textContent.endsWith(".")) {
-        return;
-    } else {
-    displayText.textContent += ".";
+    const array = displayText.textContent.split(" ");
+    if (array.length === 1 && array[0].includes(".")) {
+        return; 
     }
+    if (array.length === 3 && array[2].includes(".")) {
+        return;
+    }
+    displayText.textContent += ".";
 });
+
 
 clearButton.addEventListener("click", function() { 
     displayText.textContent = "";
@@ -168,6 +234,8 @@ document.addEventListener("keydown", function(event) {
 
 
 
+
+
 function calculate() {
     operationDone = true;
     array = displayText.textContent.split(" ");
@@ -186,6 +254,5 @@ function round(value, precision) {
 
 equalButton.addEventListener("click", calculate);
     
-
 
 
